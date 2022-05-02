@@ -55,33 +55,87 @@ class BinarySearchTree {
     // throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
 
-    function findNode( head, data ) {
-      if (head.data === data) {
-        return head;
-      } else if ( data < head.data ) {
-        findNode( head.left, data);
-      } else if ( data > head.data ) {
-        findNode( head.right, data);
+    // let currentData = new Node()
+    
+
+
+    const searchData = (current, data) => {
+      
+      if (current === null) {
+        return null;
+      } else if (data < current.data) {
+        return searchData(current.left, data)
+      } else if (data > current.data){
+        return searchData(current.right, data)
       } else {
-        return false;
+        return current;
       }
     }
-    findNode( this.head, data );
+
+    return searchData(this.head, data);
+    
+
   }
 
-  remove(/* data */) {
+  remove( data ) {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
+
+    const removeNode = (node, data) => {
+      if (node === null) return null;
+      if (node.data === data) {
+        if (node.left === null && node.right === null) return null;
+        if (node.left === null) return node.right;
+        if (node.right === null) return node.left;
+        let tempNode = node.right;
+
+        while (tempNode.left !== null) {
+          tempNode = tempNode.left;
+        }
+        node.data = tempNode.data;
+        node.right = removeNode(node.right, tempNode.data);
+        return node;
+      } else if (data < node.data) {
+        node.left = removeNode(node.right, data);
+        return node;
+      } else {
+        node.right = removeNode(node.right, data);
+        return node;
+      }
+    }
+    removeNode(this.head, data);
   }
 
   min() {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
+    let min = this.head
+    let currentNode = min;
+    let currentData = min.data;
+
+    if (currentNode === null) return null;
+
+    while (currentNode.left !== null) {
+      currentNode = currentNode.left;
+      currentData = currentData.left.data
+    }
+    return currentData;
   }
 
   max() {
     throw new NotImplementedError('Not implemented');
     // remove line with error and write your code here
+    let max = this.head
+    let currentNode = max;
+    let currentData = max.data;
+    
+    if (currentNode === null) return null;
+
+    while (currentNode.right !== null) {
+      currentNode = currentNode.right;
+      currentData = current.right.data;
+    }
+    return currentData;
   }
 }
 
