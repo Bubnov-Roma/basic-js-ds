@@ -20,23 +20,10 @@ class Queue {
   }
 
   getUnderlyingList() {
-    // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
-
-    // let list = null;
-
-    // for (let i = queue.length - 1; i >= 0; i--) {
-    //   list = {value: new ListNode(i), next: list};
-    // }
-    // console.log(list);
-
     return this.list;
-    
   }
 
-  enqueue( value ) {
-    // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  enqueue(value) {
     if (!this.list) {
       this.list = new ListNode(value);
       this.queue = this.list;
@@ -44,15 +31,11 @@ class Queue {
       this.queue.next = new ListNode(value);
       this.queue = this.queue.next;
     }
-
   }
 
   dequeue() {
-    // throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
     let listValue = this.list.value
     this.list = this.list.next;
-
     return listValue;
   }
 }
